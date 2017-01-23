@@ -17,7 +17,7 @@ class StateA(State):
 
 class StateB(State):
     event_B = 'EVENT_B'
-    
+
     def bar(self):
         print('bar')
         self._automaton.cast(self.event_B)
@@ -57,7 +57,7 @@ class ConcreteAutomaton(Automaton):
 
 if __name__ == "__main__":
     automaton = ConcreteAutomaton()
-    automaton.register('EVENT_A', StateA, StateB)
-    automaton.register('EVENT_B', StateB, StateA)
+    automaton.register(StateA.event_A, StateA, StateB)
+    automaton.register(StateB.event_B, StateB, StateA)
     automaton.foo()
     automaton.bar()
