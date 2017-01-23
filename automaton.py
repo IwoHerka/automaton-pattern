@@ -7,20 +7,18 @@ class State(object):
         self._automaton = automaton
 
 
-class StateA(State):
-    event_A = 'EVENT_A'
+class Disconnected(State):
+    connected = 'CONNECTED'
 
-    def foo(self):
-        print('foo')
-        self._automaton.cast(self.event_A)
+    def connect(self):
+        self._automaton.cast(self.connected)
 
 
-class StateB(State):
-    event_B = 'EVENT_B'
+class Connected(State):
+    disconnected = 'DISCONNECTED'
 
-    def bar(self):
-        print('bar')
-        self._automaton.cast(self.event_B)
+    def disconnect(self):
+        self._automaton.cast(self.disconnected)
 
 
 class Automaton(object):
@@ -46,18 +44,18 @@ class Automaton(object):
 class ConcreteAutomaton(Automaton):
     def __init__(self):
         super(ConcreteAutomaton, self).__init__()
-        self._state = StateA(self)
+        self._state = Disconnected(self)
 
-    def foo(self):
-        self._state.foo()
+    def connect(self):
+        self._state.connect()
 
-    def bar(self):
-        self._state.bar()
+    def disconnect(self):
+        self._state.disconnect()
 
 
 if __name__ == "__main__":
     automaton = ConcreteAutomaton()
-    automaton.register(StateA.event_A, StateA, StateB)
-    automaton.register(StateB.event_B, StateB, StateA)
-    automaton.foo()
-    automaton.bar()
+    automaton.register(Disconnected.connected, Disconnected, Connected)
+    automaton.register(Connected.disconnected, Connected, Disconnected)
+    automaton.connect()
+    automaton.disconnect()
