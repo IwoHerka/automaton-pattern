@@ -2,23 +2,22 @@ class InvalidTransitionException(Exception):
     pass
 
 
-class StateA(object):
-    event_A = 'EVENT_A'
-
+class State(object):
     def __init__(self, automaton):
         self._automaton = automaton
+
+
+class StateA(State):
+    event_A = 'EVENT_A'
 
     def foo(self):
         print('foo')
         self._automaton.cast(self.event_A)
 
 
-class StateB(object):
+class StateB(State):
     event_B = 'EVENT_B'
-
-    def __init__(self, automaton):
-        self._automaton = automaton
-
+    
     def bar(self):
         print('bar')
         self._automaton.cast(self.event_B)
