@@ -2,23 +2,35 @@ class InvalidTransitionException(Exception):
     pass
 
 
+class IllegalActionException(Exception):
+    pass
+
+
 class State(object):
     def __init__(self, automaton):
         self._automaton = automaton
 
 
 class Disconnected(State):
-    connected = 'CONNECTED'
+    CONNECT = 'CONNECT'
 
     def connect(self):
-        self._automaton.cast(self.connected)
+        self._automaton.cast(self.CONNECT)
+
+    def send_msg(self, msg):
+        # Either automatically connect, or throw an exception.
+        err_msg = 'Cannot send messages in disconnected state!'
+        raise IllegalActionException(err_msg)
 
 
 class Connected(State):
-    disconnected = 'DISCONNECTED'
+    DISCONNECT = 'DISCONNECT'
 
     def disconnect(self):
-        self._automaton.cast(self.disconnected)
+        self._automaton.cast(self.DISCONNECT)
+
+    def send_msg(self, msg):
+        print('Message sent!')
 
 
 class Automaton(object):
@@ -52,10 +64,17 @@ class ConcreteAutomaton(Automaton):
     def disconnect(self):
         self._state.disconnect()
 
+    def send_msg(self, msg):
+        self._state.send_msg(msg)
+
 
 if __name__ == "__main__":
     automaton = ConcreteAutomaton()
-    automaton.register(Disconnected.connected, Disconnected, Connected)
-    automaton.register(Connected.disconnected, Connected, Disconnected)
+
+    automaton.register(Disconnected.CONNECT, Disconnected, Connected)
+    automaton.register(Connected.DISCONNECT, Connected, Disconnected)
+
     automaton.connect()
+    automaton.send_msg('First message!')
     automaton.disconnect()
+    automaton.send_msg('Second message!')
