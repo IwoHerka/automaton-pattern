@@ -53,9 +53,9 @@ class Automaton(object):
             self._state = st_pair[1](self)
 
 
-class ConcreteAutomaton(Automaton):
+class TCPConnection(Automaton):
     def __init__(self):
-        super(ConcreteAutomaton, self).__init__()
+        super(TCPConnection, self).__init__()
         self._state = Disconnected(self)
 
     def connect(self):
@@ -69,7 +69,7 @@ class ConcreteAutomaton(Automaton):
 
 
 if __name__ == "__main__":
-    automaton = ConcreteAutomaton()
+    automaton = TCPConnection()
 
     automaton.register(Disconnected.CONNECT, Disconnected, Connected)
     automaton.register(Connected.DISCONNECT, Connected, Disconnected)
