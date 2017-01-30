@@ -13,7 +13,7 @@ public class Automaton<T> {
     }
 
     public void cast(final String EVENT) throws IllegalTransitionException {
-        Transition<T> transition = (Transition<T>) mTable.get(EVENT);
+        Transition<T> transition = mTable.get(EVENT);
 
         if (!transition.getPrevious().getClass().equals(mState.getClass())) {
             throw new IllegalTransitionException(null);
