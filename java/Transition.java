@@ -1,17 +1,17 @@
-public class Transition {
-    private State mPrevious;
-    private State mNext;
+public class Transition<T> {
+    private T mPrevious;
+    private T mNext;
 
-    public Transition(State previous, State next) {
+    public Transition(T previous, T next) {
         mPrevious = previous;
         mNext = next;
     }
 
-    public State getPrevious() {
+    public T getPrevious() {
         return mPrevious;
     }
 
-    public State getNext() {
+    public T getNext() {
         return mNext;
     }
 }

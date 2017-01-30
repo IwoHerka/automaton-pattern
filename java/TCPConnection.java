@@ -1,18 +1,18 @@
-public class TCPConnection extends Automaton {
+public class TCPConnection extends Automaton<State> {
     public TCPConnection() {
         super();
         mState = new Disconnected(this);
     }
 
-    public void connect() {
+    public void connect() throws IllegalTransitionException {
         mState.connect();
     }
 
-    public void disconnect() {
+    public void disconnect() throws IllegalTransitionException {
         mState.disconnect();
     }
 
-    public void sendMsg(String msg) {
+    public void sendMsg(String msg) throws IllegalActionException {
         mState.sendMsg(msg);
     }
 }

@@ -7,14 +7,14 @@ public class Disconnected implements State {
         mAutomaton = automaton;
     }
 
-    public void connect() {
+    public void connect() throws IllegalTransitionException {
        mAutomaton.cast(CONNECT);
     }
 
     public void disconnect() {}
 
-    public void sendMsg(String msg) {
+    public void sendMsg(String msg) throws IllegalActionException {
         final String errMsg = "Cannot send messages in disconnected state!";
-        //throw new IllegalActionException(errMsg);
+        throw new IllegalActionException(errMsg);
     }
 }

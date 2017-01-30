@@ -7,15 +7,13 @@ public class Connected implements State {
         mAutomaton = automaton;
     }
 
-    public void connect() {
-        //throw new IllegalActionException("");
-    }
+    public void connect() {}
 
-    public void disconnect() {
+    public void disconnect() throws IllegalTransitionException {
         mAutomaton.cast(DISCONNECT);
     }
 
     public void sendMsg(String msg) {
-        // out.println("Sending message!");
+        System.out.println(msg);
     }
 }

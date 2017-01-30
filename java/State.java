@@ -1,5 +1,5 @@
 public interface State {
-    public void connect();
-    public void disconnect();
-    public void sendMsg(String msg);
+    public void connect() throws IllegalTransitionException;
+    public void disconnect() throws IllegalTransitionException;
+    public void sendMsg(String msg) throws IllegalActionException;
 }
