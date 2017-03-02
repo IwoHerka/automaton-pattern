@@ -1,9 +1,4 @@
-public class TCPConnection extends Automaton<State> {
-    public TCPConnection() {
-        super();
-        mState = new Disconnected(this);
-    }
-
+public class TCPConnection extends Context {
     public void connect() throws IllegalTransitionException {
         mState.connect();
     }
@@ -15,4 +10,6 @@ public class TCPConnection extends Automaton<State> {
     public void sendMsg(String msg) throws IllegalActionException {
         mState.sendMsg(msg);
     }
+
+
 }

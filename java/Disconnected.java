@@ -1,14 +1,12 @@
-public class Disconnected implements State {
+public class Disconnected extends State implements IAutomaton {
     public final static String CONNECT = "CONNECT";
 
-    private Automaton mAutomaton;
-
-    public Disconnected(Automaton automaton) {
-        mAutomaton = automaton;
+    public Disconnected(Context context) {
+      super(context);
     }
 
     public void connect() throws IllegalTransitionException {
-       mAutomaton.cast(CONNECT);
+       cast(CONNECT);
     }
 
     public void disconnect() {}

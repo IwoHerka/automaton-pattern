@@ -2,8 +2,13 @@ public class Main {
     public static void main(String [] args) {
         TCPConnection automaton = new TCPConnection();
 
-        automaton.register(Connected.DISCONNECT, new Connected(automaton), new Disconnected(automaton));
-        automaton.register(Disconnected.CONNECT, new Disconnected(automaton), new Connected(automaton));
+        Connected connected = new Connected(automaton);
+        Disconnected disconnected = new Disconnected(automaton);
+
+        automaton.setState(disconnected);
+
+        connected.register(Connected.DISCONNECT, disconnected);
+        disconnected.register(Disconnected.CONNECT, connected);
 
         try {
             automaton.connect();
